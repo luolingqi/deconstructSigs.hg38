@@ -80,14 +80,14 @@ mut.to.sigs.input = function(mut.ref, sample.id = 'Sample', chr = 'chr', pos = '
     # If set to default, carry on happily
     if(is.null(bsg)){
       # Remove any entry in chromosomes that do not exist in the BSgenome.Hsapiens.UCSC.hg19::Hsapiens object    
-      unknown.regions <- levels(mut[, chr])[which(!(levels(mut[, chr]) %in% GenomeInfoDb::seqnames(BSgenome.Mmusculus.UCSC.hg38::Hsapiens)))]
+      unknown.regions <- levels(mut[, chr])[which(!(levels(mut[, chr]) %in% GenomeInfoDb::seqnames(BSgenome.Hsapiens.UCSC.hg38::Hsapiens)))]
       if (length(unknown.regions) > 0) {
         unknown.regions <- paste(unknown.regions, collapse = ',\ ')
-        warning(paste('Check chr names -- not all match BSgenome.Mmusculus.UCSC.hg38::Hsapiens object:\n', unknown.regions, sep = ' '))      
-        mut <- mut[mut[, chr] %in% GenomeInfoDb::seqnames(BSgenome.Mmusculus.UCSC.hg38::Hsapiens), ]
+        warning(paste('Check chr names -- not all match BSgenome.Hsapiens.UCSC.hg38::Hsapiens object:\n', unknown.regions, sep = ' '))      
+        mut <- mut[mut[, chr] %in% GenomeInfoDb::seqnames(BSgenome.Hsapiens.UCSC.hg38::Hsapiens), ]
       }
       # Add in context
-      mut$context = BSgenome::getSeq(BSgenome.Mmusculus.UCSC.hg38::Hsapiens, mut[,chr], mut[,pos]-1, mut[,pos]+1, as.character = T)
+      mut$context = BSgenome::getSeq(BSgenome.Hsapiens.UCSC.hg38::Hsapiens, mut[,chr], mut[,pos]-1, mut[,pos]+1, as.character = T)
     }
     
     # If set to another build, use that one 
